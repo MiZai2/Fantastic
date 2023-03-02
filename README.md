@@ -2,6 +2,8 @@
 
 ![plugin_demo](./assets/ui.png)
 
+需要自行编译安装oxp-platform-dkms驱动方能使用。
+
 Steam Deck fan controls.
 
 This plugin is a bit special because it doesn't use the standard Python back-end.
