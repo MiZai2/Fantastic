@@ -118,9 +118,10 @@ impl ControlRuntime {
     fn on_set_enable(settings: &Settings, _state: &State) {
         // stop/start jupiter fan control (since the client-side way of doing this was removed :( )
         Self::enforce_jupiter_status(settings.enable);
-        if let Err(e) = crate::sys::write_fan_recalc(settings.enable) {
+        /*if let Err(e) = crate::sys::write_fan_recalc(settings.enable) {
             log::error!("runtime failed to write to fan recalculate file: {}", e);
-        }
+        }*/
+        crate::sys::write_fan_recalc2(settings.enable);
     }
 
     fn do_fan_control(settings: &Settings) {
@@ -161,9 +162,10 @@ impl ControlRuntime {
             1.0
         };
         let fan_speed: u64 = ((fan_ratio * (settings.fan_bounds.max - settings.fan_bounds.min)) + settings.fan_bounds.min) as _;
-        if let Err(e) = crate::sys::write_fan_target(fan_speed) {
+        /*if let Err(e) = crate::sys::write_fan_target(fan_speed) {
             log::error!("runtime failed to write to fan target file: {}", e);
-        }
+        }*/
+        crate::sys::write_fan_target2(fan_speed);
     }
 
     fn interpolate_fan(settings: &Settings, index: Option<usize>, t_ratio: f64) -> f64 {
